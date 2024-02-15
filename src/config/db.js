@@ -19,7 +19,13 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     }
     catch (error) {
-        console.error(`Error: ${error.message}`);
+        // Perform a type check on the error
+        if (error instanceof Error) {
+            console.error(`Errorsqqq: ${error.message}`);
+        }
+        else {
+            console.error('An unknown error occurred');
+        }
         process.exit(1);
     }
 });

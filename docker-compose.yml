@@ -1,20 +1,26 @@
 version: '3.8'
+
 services:
   app:
-    container_name: nodejs-app
+    container_name: ecommerce-app
     build: .
     ports:
       - "3000:3000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/mydatabase
+      # MongoDB URI for the app to connect to the database
+      MONGO_URI: mongodb://mongo:27017/ecommerce
+      # JWT secret used for token generation and verification
+      JWT_SECRET: coding
     depends_on:
       - mongo
+
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
     volumes:
+      # Persistent volume for MongoDB data storage
       - mongo-data:/data/db
 
 volumes:

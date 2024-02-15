@@ -1,26 +1,23 @@
-# Use an official Node runtime as a parent image
+# Use an official Node.js runtime as a parent image
 FROM node:14
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (or npm-shrinkwrap.json) to the working directory
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install project dependencies
+# Install dependencies
 RUN npm install
 
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle the source code inside the Docker image
+# Bundle app source
 COPY . .
 
-# Build the TypeScript files
+# Build TypeScript to JavaScript
 RUN npm run build
 
-# Your app binds to port 3000, so use the EXPOSE instruction to have it mapped by the docker daemon
+# Expose port 3000 for the application
 EXPOSE 3000
 
-# Define the command to run your app using CMD which defines your runtime
-CMD [ "node", "dist/app.js" ]
+# Define the command to run the app
+CMD [ "node", "dist/server.js" ]

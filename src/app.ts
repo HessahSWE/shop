@@ -1,17 +1,34 @@
+// Load environment variables from .env file
 import dotenv from 'dotenv';
-import express from 'express';
-import connectDB from './config/db';
-import userRoutes from './routes/authRoutes';
-import productRoutes from './routes/productRoutes';
-
 dotenv.config();
+
+import express from 'express';
+import mongoose from 'mongoose';
+import userRoutes from './routes/authRoutes'; // Import routes for user authentication
+import productRoutes from './routes/productRoutes'; // Import routes for products
+
+// Function to connect to MongoDB database
+const connectDB = async (): Promise<void> => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI!);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error connecting to MongoDB: ${error}`);
+    process.exit(1); // Exit the process with an error code
+  }
+};
+
+// Connect to MongoDB
 connectDB();
 
+// Create an Express application
 const app = express();
-app.use(express.json());
+app.use(express.json()); // Middleware to parse JSON request bodies
 
-app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes);
+// Route handling
+app.use('/api/users', userRoutes); // User authentication routes
+app.use('/api/products', productRoutes); // Product routes
 
-const PORT = process.env.PORT || 5000;
+// Define the port for the server to listen on
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
