@@ -15,12 +15,12 @@ Setup Instructions
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 1. Clone the Repository
 Clone this repository to your local machine:
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/HessahSWE/shop
+cd shop
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 2. Environment Configuration
-Copy the .env.example file to a new file named .env and update the environment variables to match your setup:
-cp .env.example .env
+the .env file to a new file named .env and update the environment variables to match your setup:
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 3. Install Dependencies
 Install the necessary Node.js dependencies:
